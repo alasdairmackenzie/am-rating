@@ -6,31 +6,30 @@
 
 
 import {
-  MyComponent as MyComponent
-} from './components/my-component/my-component';
+  AMRating as AmRating
+} from './components/am-rating/am-rating';
 
 declare global {
-  interface HTMLMyComponentElement extends MyComponent, HTMLElement {
+  interface HTMLAmRatingElement extends AmRating, HTMLElement {
   }
-  var HTMLMyComponentElement: {
-    prototype: HTMLMyComponentElement;
-    new (): HTMLMyComponentElement;
+  var HTMLAmRatingElement: {
+    prototype: HTMLAmRatingElement;
+    new (): HTMLAmRatingElement;
   };
   interface HTMLElementTagNameMap {
-    "my-component": HTMLMyComponentElement;
+    "am-rating": HTMLAmRatingElement;
   }
   interface ElementTagNameMap {
-    "my-component": HTMLMyComponentElement;
+    "am-rating": HTMLAmRatingElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "my-component": JSXElements.MyComponentAttributes;
+      "am-rating": JSXElements.AmRatingAttributes;
     }
   }
   namespace JSXElements {
-    export interface MyComponentAttributes extends HTMLAttributes {
-      first?: string;
-      last?: string;
+    export interface AmRatingAttributes extends HTMLAttributes {
+      
     }
   }
 }

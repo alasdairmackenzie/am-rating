@@ -1,8 +1,8 @@
 exports.config = {
-  namespace: 'mycomponent',
+  namespace: 'am-rating',
   generateDistribution: true,
   bundles: [
-    { components: ['my-component'] }
+    { components: ['am-rating'] }
   ]
 };
 

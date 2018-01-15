@@ -1,14 +1,14 @@
 {
-  "name": "my-component",
+  "name": "am-rating",
   "version": "0.0.1",
-  "description": "Stencil Component Starter",
-  "main": "dist/mycomponent.js",
+  "description": "A Rating Stencil Component",
+  "main": "dist/am-rating.js",
   "types": "dist/types/index.d.ts",
   "collection": "dist/collection/collection-manifest.json",
   "files": [
     "dist/"
   ],
-  "browser": "dist/mycomponent.js",
+  "browser": "dist/am-rating.js",
   "scripts": {
     "build": "stencil build",
     "dev": "sd concurrent \"stencil build --dev --watch\" \"stencil-dev-server\" ",
@@ -28,9 +28,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ionic-team/stencil-component-starter.git"
+    "url": "git+https://github.com/alasdairmackenzie/am-rating.git"
   },
-  "author": "Ionic Team",
+  "author": "Alasdair Mackenzie",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/ionic-team/stencil"
