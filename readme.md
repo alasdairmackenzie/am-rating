@@ -2,9 +2,9 @@
 
 # A rating component built with Stencil
 ##Introduction
-This is a basic rating web-component.
+This is a basic rating web-component.  It allows for a max rating to be set as well as user input (if required).  If the user does select a rating then an event is fired, which can be handled in pure JS or by a framework of your choice. The component is full customisable using a SVG polygon and can accept half-step ratings.
 
-## Install
+## Installation
 
 ### Script tag
 
