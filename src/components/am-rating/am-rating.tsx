@@ -1,4 +1,4 @@
-import { Component, Prop, State } from '@stencil/core';
+import { Component, Prop, State, Event, EventEmitter } from '@stencil/core';
 /**
  * A simple rating component using StencilJS
  */
@@ -8,6 +8,16 @@ import { Component, Prop, State } from '@stencil/core';
   shadow: true
 })
 export class AMRating {
+   /**
+   * The rating identifier
+   */
+  @Prop() reference: string = "rating-component";
+
+   /**
+   * Determines if the user can set a rating
+   */
+  @Prop() interactive: boolean = false;
+
   /**
    * The rating
    */
@@ -23,6 +33,11 @@ export class AMRating {
    */
   @Prop() maxRating: number = 5;
 
+   /**
+   * Determines if half ratings are allowed
+   */
+  @Prop() allowHalfRatings: boolean = false;
+
   /**
    * This is a star!
    */
@@ -36,17 +51,17 @@ export class AMRating {
   /**
    * The color to fill the rating with when it's within the max
    */
-  @Prop() colorOn: string = "green";
+  @Prop() colorOn: string = "#000000";
 
   /**
    * The color to fill the rating with when it's outwith the max
    */
-  @Prop() colorOff: string = "yellow";
+  @Prop() colorOff: string = "#ffffff";
 
   /**
    * The color to fill the rating with when it's outwith the max
    */
-  @Prop() colorOutline: string = "black";
+  @Prop() colorOutline: string = "#666666";
 
    /**
    * The direction of the shading.
@@ -54,6 +69,25 @@ export class AMRating {
    */
   @Prop() direction: string = "ltr";
 
+
+   /**
+   * The view box for the SVG
+   */
+  @Prop() sbgViewBox: string = "0 0 100 100";
+
+  /**
+   * Event fired when the rating is updated by user input
+   */
+  @Event() ratingUpdated: EventEmitter;
+
+  /**
+   * Keeps the internal rating (prop rating cannot be reassigned)
+   */
+  private internalRating: number = 0;
+
+  /**
+   * Specifies the available gradient directions
+   */
   private directionSettings = {
     'ltr' : { "x1" : "0", "x2" : "1","y1" : "0","y2" : "0" },
     'ttb' : { "x1" : "0", "x2" : "0","y1" : "0","y2" : "1" }
@@ -64,10 +98,15 @@ export class AMRating {
    * 1) set the rating items from the various parameters that were passed in
    */
   componentWillLoad() {
+    this.internalRating = this.rating;
+    this.createRatingItems();
+  }
+
+  createRatingItems(){
     let items = [];
 
-    const ratingFloor = Math.floor(this.rating);
-    const ratingRemainder = this.rating % 1 * 100;
+    const ratingFloor = Math.floor(this.internalRating);
+    const ratingRemainder = this.internalRating % 1 * 100;
 
     for(var i = 0; i < this.maxRating; i++){
       const itemPercent = i < ratingFloor ? 100 : ( ratingFloor === i ? ratingRemainder : 0 );
@@ -82,6 +121,41 @@ export class AMRating {
   }
 
   /**
+   * Handle the mouse being pressed and update the internal rating
+   *
+   * TODO: 1. have this reflected in the external rating
+   *       2. allow for a nth rating based on the steps per item
+   */
+  handleMouseDown(event) {
+    let svgElement =  event.path[2];
+
+    if(!svgElement.getBBox){
+
+      return;
+    }
+
+    const clickPos = event.offsetX;
+    const svgWidth = svgElement.getBBox().width ;
+    const clickPercentage = svgWidth/100*clickPos;
+
+    let newRating = 0;
+    while((svgElement=svgElement.previousSibling)!=null) ++newRating;
+
+    newRating = this.allowHalfRatings ? ( newRating + (clickPercentage < 50 ? + 0.5 : 1) ) : ++newRating;
+    this.updateRating( newRating );
+  }
+
+  updateRating(newRating){
+    this.internalRating = newRating;
+    this.createRatingItems();
+
+    this.ratingUpdated.emit( {
+      'reference' : this.reference,
+      'rating' : this.internalRating
+    });
+  }
+
+  /**
    * When the state changes,
    * render the view
    */
@@ -90,11 +164,12 @@ export class AMRating {
       <div>
         {this.ratingItems.map( (ratingItem, i ) =>
         <svg
-          viewBox="0 0 100 100"
+          viewBox={this.svgViewBox}
           version="1.1"
           width={this.direction === 'ltr' ? (100 / this.ratingItems.length ) + '%' : '100%'}
           xmlns="http://www.w3.org/2000/svg"
           class="rating-item"
+          onMouseDown={ () => this.handleMouseDown(event) }
           >
             <defs>
               <linearGradient

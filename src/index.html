@@ -3,20 +3,40 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
-  <title>A rating component build with StencilJS</title>
+  <title>A rating component built with Stencil</title>
   <script src="/build/am-rating.js"></script>
 </head>
 <body>
-  <div style="width:100%">
-      <am-rating
-      rating="3.5"
+  <h1>A rating component built with Stencil</h1>
+
+  <h2>Demo</h2>
+
+  <div style="width:100%;">
+    <am-rating
+      reference="rating-widget-1"
+      rating="1.5"
       min-rating="0"
-      max-rating="5"
-      color-on="#333"
-      color-off="#eee"
+      max-rating="10"
+      color-on="green"
+      color-off="blue"
       color-outline="#666"
       direction="ltr"
+      allow-half-ratings="true"
+      interactive="true"
     />
   </div>
+  <h2>Rating from user event</h2>
+
+  <p id="result">
+    Click on a star to see rating
+  </p>
+
+  <script>
+    window.addEventListener('ratingUpdated', (event) => {
+      var result = document.getElementById("result");
+      result.innerHTML = `The rating of ${event.detail.reference} has changed to ${event.detail.rating}!  `
+    });
+  </script>
+
 </body>
 </html>

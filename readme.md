@@ -18,7 +18,9 @@ This is a basic rating web-component.
 
 
 ##How to use
-To include the component on your page use the `<am-rating/>` tag.  To set values for the display, you can assign the following attributes.
+To include the component on your page use the `<am-rating/>` tag.  To set values for the display, you can add the following properties.
+
+**Properties for `<am-rating>`**
 
 <table>
   <tr>
@@ -26,7 +28,7 @@ To include the component on your page use the `<am-rating/>` tag.  To set values
     <th>Description</th>
     <th>Default</th>
     <th>Type</th>
-    <th>Values</th>
+    <th>Possible values</th>
   </tr>
   <tr>
     <td>rating</td>
@@ -43,13 +45,6 @@ To include the component on your page use the `<am-rating/>` tag.  To set values
 	<td>number</td>
   </tr>
   <tr>
-  	<td>color-on</td>
-    <td>The color of the on rating</td>
-    <td>#000000</td>
-    <td>string</td>
-    <td>hex value or color name</td>
-  </tr>
-  <tr>
     <td>color-on</td>
     <td>The color of the off rating</td>
     <td>#000000</td>
@@ -59,33 +54,94 @@ To include the component on your page use the `<am-rating/>` tag.  To set values
   <tr>
     <td>color-outline</td>
     <td>The color of the rating items outline</td>
-    <td>#000000</td>
+    <td>#ffffff</td>
     <td>string</td>
     <td>hex value or color name (can be none)</td>
   </tr>
   <tr>
     <td>direction</td>
     <td>The fill direction for the rating items</td>
-    <td>#000000</td>
+    <td>#666666</td>
     <td>string</td>
     <td>ltr (left to right) or ttb (top to bottom)</td>
   </tr>
+  <tr>
+    <td>interactive**</td>
+    <td>Allow the user to submit a rating</td>
+    <td>false</td>
+    <td>boolean</td>
+    <td>true|false</td>
+  </tr>
+  <tr>
+    <td>allow-half-ratings</td>
+    <td>Allow the user to submit half ratings</td>
+    <td>false</td>
+    <td>boolean</td>
+    <td>true|false</td>
+  </tr>
+   <tr>
+    <td>svg-points</td>
+    <td>Change the default shape</td>
+    <td>A star shape***</td>
+    <td>string</td>
+    <td>Any string</td>
+  </tr>
+  <tr>
+    <td>svg-view-box</td>
+    <td>Change the default view box for the SVG</td>
+    <td>0 0 100 100</td>
+    <td>string</td>
+    <td>Any valid view box configuration</td>
+  </tr>
 </table>
 
+**If you set interactive to true, the user will be able to tap on the element and assign a new rating.  This will fire an event with the new rating.
+
+***The item shape is an SVG polygon contained within a "0 0 100 100" viewbox. Use the svg-view-box property to change this.
+
+**Events fired by `<am-rating>`**
+
+<table>
+  <tr>
+    <th>Event</th>
+    <th>Description</th>
+    <th>Type</th>
+    <th>Values</th>
+  </tr>
+  <tr>
+    <td>ratingUpdated </td>
+    <td>The new rating of the widget</td>
+    <td>Object</td>
+    <td>{ "detail" : { "reference" : &lt;string&gt, "rating" : &ltnumber&gt; } }</td>
+  </tr>
+ </table>
 
 **Example:**
 
 ```html
- <am-rating
-  rating="3.5"
-  max-rating="5"
-  color-on="#333"
-  color-off="#eee"
+<am-rating
+  reference="rating-widget-1"
+  rating="1.5"
+  min-rating="0"
+  max-rating="10"
+  color-on="green"
+  color-off="blue"
   color-outline="#666"
   direction="ltr"
+  allow-half-ratings="true"
+  interactive="true"
 />
 ```
 
+```javascript
+<script>
+  window.addEventListener('ratingUpdated', (event) => {
+    const reference = event.detail.reference;
+    const rating = event.detail.rating;
+  });
+</script>
+
+```
 
 ##Contribute
 If you want to contribute then create a fork, make your changes and create a pull request.
