@@ -29,7 +29,14 @@ declare global {
   }
   namespace JSXElements {
     export interface AmRatingAttributes extends HTMLAttributes {
-      
+      colorOff?: string;
+      colorOn?: string;
+      colorOutline?: string;
+      direction?: string;
+      maxRating?: number;
+      minRating?: number;
+      rating?: number;
+      svgPoints?: string;
     }
   }
 }
