@@ -39,8 +39,8 @@ declare global {
       minRating?: number;
       rating?: number;
       reference?: string;
-      sbgViewBox?: string;
       svgPoints?: string;
+      svgViewBox?: string;
     }
   }
 }

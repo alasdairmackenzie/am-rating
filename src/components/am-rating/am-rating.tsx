@@ -69,11 +69,10 @@ export class AMRating {
    */
   @Prop() direction: string = "ltr";
 
-
    /**
    * The view box for the SVG
    */
-  @Prop() sbgViewBox: string = "0 0 100 100";
+  @Prop() svgViewBox: string = "0 0 100 100";
 
   /**
    * Event fired when the rating is updated by user input
@@ -94,14 +93,16 @@ export class AMRating {
   };
 
   /**
-   * Once the component is loaded we
-   * 1) set the rating items from the various parameters that were passed in
+   * Once the component is loaded do the setup
    */
   componentWillLoad() {
     this.internalRating = this.rating;
     this.createRatingItems();
   }
 
+  /**
+   * Create rating items
+   */
   createRatingItems(){
     let items = [];
 
@@ -122,14 +123,11 @@ export class AMRating {
 
   /**
    * Handle the mouse being pressed and update the internal rating
-   *
-   * TODO: 1. have this reflected in the external rating
-   *       2. allow for a nth rating based on the steps per item
    */
   handleMouseDown(event) {
     let svgElement =  event.path[2];
 
-    if(!svgElement.getBBox){
+    if(!svgElement.getBBox || !this.interactive){
 
       return;
     }
