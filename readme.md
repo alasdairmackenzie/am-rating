@@ -12,7 +12,7 @@ This is a basic rating web-component.
 - Then you can use the element anywhere in your template, JSX, html etc
 
 ###Node Modules
-- Run `npm install my-component --save`
+- Run `npm install am-rating --save`
 - Put a script tag similar to this `<script src='node_modules/am-rating/dist/am-rating.js'></script>` in the head of your index.html
 - Then you can use the element anywhere in your template, JSX, html etc
 
