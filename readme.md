@@ -2,21 +2,21 @@
 
 # A rating component built with Stencil
 ##Introduction
-This is a basic rating web-component.  It allows for a max rating to be set as well as user input (if required).  If the user does select a rating then an event is fired, which can be handled in pure JS or by a framework of your choice. The component is full customisable using a SVG polygon and can accept half-step ratings.
+This is a basic rating web-component.  It allows for a max rating to be set as well as user input (if required).  If the user does select a rating then an event is fired, which can be handled in pure JS or by a framework of your choice. The component is fully customisable using a SVG polygon and can accept half-step ratings.
 
 ![Rating](https://raw.githubusercontent.com/alasdairmackenzie/am-rating/master/resources/4.5-out-of-10.png)
 
-## Installation
+## Install
 
 ### Script tag
 
-- Put a script tag similar to this `<script src='https://unpkg.com/am-rating@0.0.1/dist/am-rating.js'></script>` in the head of your index.html
-- Then you can use the element anywhere in your template, JSX, html etc
+- Put the script tag `<script src='https://unpkg.com/am-rating@0.0.1/dist/am-rating.js'></script>` on your page
+- Then you can use the element anywhere in your template or html.
 
 ### Node Modules
 - Run `npm install am-rating --save`
-- Put a script tag similar to this `<script src='node_modules/am-rating/dist/am-rating.js'></script>` in the head of your index.html
-- Then you can use the element anywhere in your template, JSX, html etc
+- Put the script tag `<script src='node_modules/am-rating/dist/am-rating.js'></script>` on your page
+- Then you can use the element anywhere in your template or html.
 
 ##How to use
 To include the component on your page use the `<am-rating/>` tag.  To set values for the display, you can add the following properties.

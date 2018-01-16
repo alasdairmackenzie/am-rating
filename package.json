@@ -1,6 +1,6 @@
 {
   "name": "am-rating",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description":  "A rating component built with Stencil",
   "main": "dist/am-rating.js",
   "types": "dist/types/index.d.ts",
