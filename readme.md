@@ -10,7 +10,7 @@ This is a basic rating web-component.  It allows for a max rating to be set as w
 
 ### Script tag
 
-- Put the script tag `<script src='https://unpkg.com/am-rating@0.0.1/dist/am-rating.js'></script>` on your page
+- Put the script tag `<script src='https://unpkg.com/am-rating@0.0.5/dist/am-rating.js'></script>` on your page
 - Then you can use the element anywhere in your template or html.
 
 ### Node Modules
